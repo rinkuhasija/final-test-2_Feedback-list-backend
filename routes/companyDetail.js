@@ -33,71 +33,9 @@ router.post('/companies-list', requireAuth, async (req, res) => {
     }
 });
 
-//insert many data API
-const companies = [
-    {
-        name: " Cred Club",
-        logo_url: " https://res.cloudinary.com/ddtqo540a/image/upload/v1686260470/Feedback_list_images/image_2_y2h67o.png ",
-        description: "It is good for credit card payments,it is fast,secure ",
-        category: [" Fintech ", "B2B "],
-        product_link: " https://cred.club/ "
-
-    },
-
-    {
-        name: "Apna Godam ",
-        logo_url: " https://res.cloudinary.com/ddtqo540a/image/upload/v1686260470/Feedback_list_images/image_3_aiodaa.png ",
-        description: "Provide warehouse and loan service to farmers and small traders ",
-        category: ["Agritech"],
-        product_link: " https://apnagodam.com/"
-
-    }
-
-    // {
-    //     name: " ",
-    //     logo_url: "",
-    //     description: " ",
-    //     category: [" ", " "],
-    //     product_link: " "
-
-    // },
-
-    // {
-    //     name: " ",
-    //     logo_url: "",
-    //     description: " ",
-    //     category: [" ", " "],
-    //     product_link: " "
-
-    // }
-
-    // Add more earphones as needed
-];
-
-
-router.post("/insertProductsData", async (req, res) => {
-
-    try {
-
-        // Insert the dummy data into the Product collection
-        Company.insertMany(companies)
-            .then(() => {
-                console.log('Dummy data inserted successfully.');
-            })
-            .catch((err) => {
-                console.error('Error inserting dummy data:', err);
-            });
-
-        res.status(201).send("data inserted successfully")
-
-    } catch (error) {
-        console.log("data not inserted" + error);
-    }
-
-});
 
 //get products data
-router.get("/getProductsData", async (req, res) => {
+router.get("/companies-list", async (req, res) => {
     try {
         const { category } = req.query;
     
