@@ -6,6 +6,8 @@ require('dotenv').config(); //  .env file
 
 //import routes
 const authRoutes = require('./routes/auth')
+const companyDetail = require('./routes/companyDetail')
+const upvoteData = require('./routes/upvoteData')
 
 // Create Express app
 const app = express();
@@ -32,6 +34,12 @@ mongoose.connect(process.env.MONGO_URI , { useNewUrlParser: true, useUnifiedTopo
 
 // Login and Register routes
 app.use('/api/auth', authRoutes);
+
+// company routes
+app.use('/api/company', companyDetail);
+
+// upvote routes
+app.use('/api/', upvoteData);
 
 
 app.get("/", async (req, res) => {
