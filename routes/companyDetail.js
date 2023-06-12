@@ -1,6 +1,7 @@
 const express = require('express')
 const requireAuth = require('../middlewares/requireAuth');
 const Company = require('../models/company');
+const cors = require('cors');
 
 const router = express.Router();
 
