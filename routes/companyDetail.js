@@ -33,21 +33,55 @@ router.post('/companies-list', requireAuth, async (req, res) => {
     }
 });
 
+// /update products data
+router.put('/companies-list', requireAuth,  async (req, res) => {
+
+
+    const { id } = req.body;
+    const { name, description, category, product_link, logo_url } = req.body;
+
+    try {
+
+        // Find the product by ID
+        const product = await Company.findByIdAndUpdate(id,
+            {
+                name,
+                description,
+                category,
+                product_link,
+                logo_url,
+            },
+            { new: true });
+
+        if (!product) {
+            return res.status(404).json({ error: 'Product not found' });
+        }
+
+        return res.json({ message: 'Product updated successfully', product });
+
+
+    } catch (error) {
+        console.error(error)
+    }
+
+});
+
 
 //get products data
 router.get("/companies-list", async (req, res) => {
     try {
         const { category } = req.query;
-    
+
         // Construct the query object based on the category filter
         const query = category ? { category } : {};
-    
+
         // Find companies based on the query
         const companies = await Company.find(query);
-    
-        res.status(200).json(companies); } catch (error) {
-      console.log("Error getting products Detail" + error);
+
+        res.status(200).json(companies);
+    } catch (error) {
+        console.log("Error getting products Detail" + error);
     }
-  })
+})
 
 module.exports = router;
