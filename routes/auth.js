@@ -34,10 +34,14 @@ router.post('/register', async (req, res) => {
     await user.save();
 
     // Generate JWT token
-    const token = jwt.sign({ user: user.email }, process.env.JWT_SECRET_KEY);
+    const token = jwt.sign({ user: user.email },
+      process.env.JWT_SECRET_KEY,
+      {
+        expiresIn: "6d",
+      });
 
     // Return success response
-    res.json({ success: true, token, user:email, name:name });
+    res.json({ success: true, token, user: email, name: name });
   } catch (error) {
     errorHandler(res, error);
   }
@@ -65,10 +69,15 @@ router.post('/login', async (req, res) => {
     }
 
     // Generate JWT token
-    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET_KEY);
+    const token = jwt.sign({ userId: user._id },
+      process.env.JWT_SECRET_KEY,
+      {
+        expiresIn: "6d",
+      }
+    );
 
     // Return success response
-    res.json({ success: true, token, name: user.name, user:email });
+    res.json({ success: true, token, name: user.name, user: email });
   } catch (error) {
     errorHandler(res, error);
   }
