@@ -4,6 +4,10 @@ const Company = require('../models/company');
 
 const router = express.Router();
 
+const corsOptions = {
+    origin: ['https://feedback-list-frontend.vercel.app', 'http://localhost:3000'],
+  };
+
 // Create (Company or Product) API
 router.post('/companies-list', requireAuth, async (req, res) => {
 
@@ -34,7 +38,7 @@ router.post('/companies-list', requireAuth, async (req, res) => {
 });
 
 // /update products data
-router.put('/companies-list', requireAuth,  async (req, res) => {
+router.put('/companies-list', requireAuth, cors(corsOptions),  async (req, res) => {
 
 
     const { id } = req.body;
