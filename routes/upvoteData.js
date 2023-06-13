@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Upvote = require('../models/upvote');
 
+//POST COUNT
 router.post('/upvotes/:postId', async (req, res) => {
     try {
         const postId = req.params.postId;
@@ -27,7 +28,7 @@ router.post('/upvotes/:postId', async (req, res) => {
     }
 });
 
-//GET COUNT
+//GET COUNT BY POST ID
 router.get('/upvotes/:postId', async (req, res) => {
     try {
         const postId = req.params.postId;
@@ -45,5 +46,22 @@ router.get('/upvotes/:postId', async (req, res) => {
         res.status(500).json({ message: 'Server error' });
     }
 });
+
+//GET ALl COUNTs
+router.get('/upvotes/', async (req, res) => {
+    try {
+      const upvotes = await Upvote.find();
+      const countData = {};
+  
+      upvotes.forEach(upvote => {
+        countData[upvote.postId] = upvote.count;
+      });
+  
+      res.json(countData);
+    } catch (error) {
+      console.error('Error retrieving upvote count data:', error);
+      res.sendStatus(500);
+    }
+  });
 
 module.exports = router;
