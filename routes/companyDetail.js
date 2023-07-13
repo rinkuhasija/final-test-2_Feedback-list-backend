@@ -6,7 +6,7 @@ const cors = require('cors');
 const router = express.Router();
 
 const corsOptions = {
-    origin: ['https://feedback-list-frontend.vercel.app', 'http://localhost:3000'],
+    origin: ['https://feedback-list-frontend.vercel.app', 'http://localhost:3000', 'http://localhost:5173'],
   };
 
 // Create (Company or Product) API

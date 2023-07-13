@@ -8,6 +8,7 @@ require('dotenv').config(); //  .env file
 const authRoutes = require('./routes/auth')
 const companyDetail = require('./routes/companyDetail')
 const upvoteData = require('./routes/upvoteData')
+const commentsRoutes = require('./routes/commentsRoutes')
 
 // Create Express app
 const app = express();
@@ -40,6 +41,8 @@ app.use('/api/company', companyDetail);
 
 // upvote routes
 app.use('/api/', upvoteData);
+
+app.use('/api/', commentsRoutes);
 
 
 app.get("/", async (req, res) => {
