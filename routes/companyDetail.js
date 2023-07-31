@@ -18,7 +18,7 @@ router.post('/companies-list', requireAuth, async (req, res) => {
         category,
         product_link } = req.body;
 
-    console.log(req.body)
+    // console.log(req.body)
 
     try {
         const newCompany = new Company({
